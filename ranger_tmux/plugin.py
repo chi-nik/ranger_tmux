@@ -16,6 +16,7 @@ from ranger_tmux import (
     util,
 )
 from ranger_tmux.cwd_sync import tmux_cwd_sync_now  # noqa F401
+from ranger_tmux.cwd_sync import tmux_cwd_jump  # noqa F401
 from ranger_tmux.cwd_track import tmux_cwd_track_now  # noqa F401
 from ranger_tmux.dropdown import install_tmux_dropdown_shortcut  # noqa F401
 

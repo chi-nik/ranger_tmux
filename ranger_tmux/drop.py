@@ -42,6 +42,9 @@ def jumpt_to_ranger():
     # We are in ranger
     if ranger_pane_id == this_pane_id:
         if last_pane_id:
+            util.tmux("send-keys", "-t", this_pane_id, ':')
+            util.tmux("send-keys", "-t", this_pane_id, 'tmux_cwd_jump')
+            util.tmux("send-keys", "-t", this_pane_id, 'Enter')
             pane_id = util.tmux(
                 "select-window", "-t", last_pane_id)
             pane_id = util.tmux(
