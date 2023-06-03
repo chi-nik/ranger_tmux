@@ -31,7 +31,37 @@ def animated_resize(pane_id, target_perc, duration=200):
         time.sleep(timeout)
     util.tmux("resize-pane", "-t", pane_id, "-y", f"{target_perc}%")
 
+def jumpt_to_ranger():
+    #print(sys.path)
+    # Get Ranger panel,window Intended
 
+    this_pane_id = util.tmux( "display", "-p", "#{pane_id}")
+    # TODO: ranger_tmux_pane should be set by ranger on startup
+    ranger_pane_id = util.tmux( "show", "-v", "@ranger_tmux_pane")
+    last_pane_id = util.tmux( "show", "-v", "@ranger_tmux_last_pane")
+    # We are in ranger
+    if ranger_pane_id == this_pane_id:
+        if last_pane_id:
+            pane_id = util.tmux(
+                "select-window", "-t", last_pane_id)
+            pane_id = util.tmux(
+                "select-pane", "-t", last_pane_id)
+    # we are outside
+    else:
+        util.tmux("set","@ranger_tmux_last_pane", this_pane_id)
+        pane_id = util.tmux("select-window", "-t",ranger_pane_id)
+        pane_id = util.tmux("select-pane", "-t",ranger_pane_id)
+
+
+
+    ## switch back to tmux
+    #pane_id = util.tmux(
+    #    "last-window",
+    #)
+
+
+    # opt: no
+    # opt:
 def main():
     """Launches ranger in a new pane, optionally driving pane animation."""
     ranger_script_path = util.get_ranger_script()
@@ -104,4 +134,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    #main()
+    jumpt_to_ranger()
