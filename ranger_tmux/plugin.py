@@ -49,6 +49,11 @@ def hook_init(fm):
 
     # Add ranger_tmux hooks if we are in a tmux session
     if util.check_tmux(fm):
+        # TODO: Maybe this is a wrong place
+        # set tmux user option to point to this pane
+        this_pane_id=util.tmux("display", "-p", "#{pane_id}")
+        util.tmux("set","@ranger_tmux_pane", this_pane_id)
+
 
         # Load all modules
         for mod in MODULES:
