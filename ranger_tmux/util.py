@@ -89,6 +89,8 @@ def select_shell_pane(ranger_pane):
     if other_panes:
         return list(sorted(other_panes))[0]
 
+def cd_pane_new(path, pane_id):
+    tmux("send-keys", "-t", pane_id, ' cd "{}"'.format(path), "Enter")
 
 def cd_pane(path, pane_id):
     import psutil

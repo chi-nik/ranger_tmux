@@ -51,9 +51,15 @@ def jumpt_to_ranger():
                 "select-pane", "-t", last_pane_id)
     # we are outside
     else:
+        pane_dir = util.tmux(
+            "display-message", "-p", "#{pane_current_path}")
         util.tmux("set","@ranger_tmux_last_pane", this_pane_id)
         pane_id = util.tmux("select-window", "-t",ranger_pane_id)
         pane_id = util.tmux("select-pane", "-t",ranger_pane_id)
+        util.tmux("send-keys", ':')
+        util.tmux("send-keys", 'cd {}'.format(pane_dir))
+        util.tmux("send-keys", "Enter")
+
 
 
 

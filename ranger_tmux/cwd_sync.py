@@ -18,7 +18,7 @@ class tmux_cwd_jump(Command):
     def execute(self):
         """Executes the command."""
         last_pane_id = util.tmux( "show", "-v", "@ranger_tmux_last_pane")
-        util.cd_pane(self.fm.thisdir.path, last_pane_id)
+        util.cd_pane_new(self.fm.thisdir.path, last_pane_id)
 
 class tmux_cwd_sync_now(Command):
     """Sync working directory of the "other" pane to match ranger's."""
